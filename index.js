@@ -7,6 +7,8 @@ require('dotenv').config();
 const app = express();
 const database = require('./db');
 
+app.use('/rates', require('./controllers/rates'));
+
 // Middleware
 
 app.use(cors({ credentials: true }));
