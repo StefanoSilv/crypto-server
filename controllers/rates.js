@@ -8,19 +8,55 @@ const getPastDays = number => {
 	return pastDate;
 };
 
+const getPastPastDays = number => {
+	let date1 = new Date(getPastDays(419));
+	console.log(date1);
+	let pastDate1 = new Date(
+		date1.setDate(date1.getDate() - number)
+	).toISOString();
+	console.log(pastDate1);
+	return pastDate1;
+};
+//Partire dall'899 e 900imo
 router.post('/', (req, res) => {
-	for (let i = 0; i < 7; i++) {
-		axios
-			.get(
-				`http://api.coinlayer.com/${getPastDays(i)
-					.toString()
-					.substr(0, 10)}?access_key=${
-					process.env.REACT_APP_COINLAYER_KEY
-				}&target=EUR&symbols=BTC,ETH,XRP,BCH,EOS,LTC`
-			)
-			.then(res => {
-				console.log('res.data', res.data);
-			});
-	}
+	Rates.find({ date: new Date(getPastDays(419)) }).then(res => {
+		console.log(res);
+	});
+	// for (let i = 0; i < 480; i++) {
+	// 	axios
+	// 		.get(
+	// 			`http://api.coinlayer.com/${getPastPastDays(i)
+	// 				.toString()
+	// 				.substr(0, 10)}?access_key=${
+	// 				process.env.REACT_APP_COINLAYER_KEY
+	// 			}&target=EUR`
+	// 		)
+	// 		.then(res => {
+	// 			Rates.findOneAndUpdate(
+	// 				{ date: res.data.date, target: res.data.target },
+	// 				{
+	// 					success: res.data.success,
+	// 					target: res.data.target,
+	// 					date: res.data.date,
+	// 					rates: res.data.rates
+	// 				},
+	// 				{
+	// 					upsert: true,
+	// 					runValidators: true,
+	// 					setDefaultsOnInsert: true,
+	// 					new: true
+	// 				}
+	// 			)
+	// 				.then(response => {
+	// 					console.log('ok');
+	// 				})
+	// 				.catch(err => {
+	// 					console.log({ err });
+	// 				});
+	// 		})
+	// 		.catch(err => {
+	// 			console.log({ err });
+	// 		});
+	// }
 });
 module.exports = router;

@@ -1,7 +1,14 @@
 const mongoose = require('mongoose');
 
 module.exports = mongoose.model('rates', {
-	name: {
+	succes: {
+		type: Boolean
+	},
+	target: {
 		type: String
-	}
+	},
+	date: {
+		type: Date
+	},
+	rates: [{}]
 });
