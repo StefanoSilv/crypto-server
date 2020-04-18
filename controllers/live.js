@@ -26,7 +26,7 @@ module.exports = () => {
 				}
 			)
 				.then(response => {
-					console.log('data', response);
+					console.log('success');
 				})
 				.catch(err => {
 					console.log({ err });
