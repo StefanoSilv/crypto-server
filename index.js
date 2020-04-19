@@ -9,7 +9,7 @@ const app = express();
 const database = require('./db');
 
 app.use('/rates', require('./controllers/rates'));
-// setInterval(() => require('./controllers/live')(), 2 * 1000 * 60 * 60);
+setInterval(() => require('./controllers/live')(), 2 * 1000 * 60 * 60);
 
 // Middleware
 
