@@ -71,7 +71,7 @@ router.get('/', (req, res) => {
 			{ $project: { _id: 0, target: 1, rates: 1 } }
 		  ])
 			.then(rate => {
-				res.send(rate);
+				res.send({ rate });
 			})
 			.catch(err => res.send(err))
 		: res.send({ err: 'Insert a valid argument' });
