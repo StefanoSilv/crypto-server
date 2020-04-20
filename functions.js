@@ -3,7 +3,7 @@ const axios = require('axios');
 module.exports = {
 	getByDate: date => {
 		axios
-			.get(`http://localhost:4020/rates?date=${date}`)
+			.get(`${process.ENV.API}/rates?date=${date}`)
 			.then(res => {
 				return res.data;
 			})
@@ -17,9 +17,7 @@ module.exports = {
 			date.setDate(date.getDate() - number)
 		).toISOString();
 		axios
-			.get(
-				`http://localhost:4020/rates?date=${pastDate.toString().substr(0, 10)}`
-			)
+			.get(`${process.ENV.API}/rates?date=${pastDate.toString().substr(0, 10)}`)
 			.then(res => {
 				console.log(res.data);
 				return res.data;
@@ -38,7 +36,7 @@ module.exports = {
 		let day = pastDate.toString().substr(7, 3);
 		let dateQuery = year + month + day;
 		axios
-			.get(`http://localhost:4020/rates?date=${dateQuery}`)
+			.get(`${process.ENV.API}/rates?date=${dateQuery}`)
 			.then(res => {
 				console.log(res.data);
 				return res.data;
@@ -55,7 +53,7 @@ module.exports = {
 		let day = pastDate.toString().substr(7, 3);
 		let dateQuery = year + month + day;
 		axios
-			.get(`http://localhost:4020/rates?date=${dateQuery}`)
+			.get(`${process.ENV.API}/rates?date=${dateQuery}`)
 			.then(res => {
 				console.log(res.data);
 				return res.data;
