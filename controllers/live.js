@@ -3,6 +3,7 @@ const axios = require('axios');
 
 module.exports = () => {
 	let today = new Date().toISOString();
+	console.log(today);
 	axios
 		.get(
 			`http://api.coinlayer.com/${today.toString().substr(0, 10)}?access_key=${
@@ -10,6 +11,7 @@ module.exports = () => {
 			}&target=EUR`
 		)
 		.then(res => {
+			console.log(res);
 			Rates.findOneAndUpdate(
 				{ date: res.data.date, target: res.data.target },
 				{

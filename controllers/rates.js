@@ -9,55 +9,51 @@ const getPastDays = number => {
 };
 
 const getPastPastDays = number => {
-	let date1 = new Date(getPastDays(419));
-	console.log(date1);
+	let date1 = new Date(getPastDays(898));
+
 	let pastDate1 = new Date(
 		date1.setDate(date1.getDate() - number)
 	).toISOString();
-	console.log(pastDate1);
 	return pastDate1;
 };
 //Partire dall'899 e 900imo
 router.post('/', (req, res) => {
-	Rates.find({ date: new Date(getPastDays(419)) }).then(res => {
-		console.log(res);
-	});
-	// for (let i = 0; i < 480; i++) {
-	// 	axios
-	// 		.get(
-	// 			`http://api.coinlayer.com/${getPastPastDays(i)
-	// 				.toString()
-	// 				.substr(0, 10)}?access_key=${
-	// 				process.env.REACT_APP_COINLAYER_KEY
-	// 			}&target=EUR`
-	// 		)
-	// 		.then(res => {
-	// 			Rates.findOneAndUpdate(
-	// 				{ date: res.data.date, target: res.data.target },
-	// 				{
-	// 					success: res.data.success,
-	// 					target: res.data.target,
-	// 					date: res.data.date,
-	// 					rates: res.data.rates
-	// 				},
-	// 				{
-	// 					upsert: true,
-	// 					runValidators: true,
-	// 					setDefaultsOnInsert: true,
-	// 					new: true
-	// 				}
-	// 			)
-	// 				.then(response => {
-	// 					console.log('ok');
-	// 				})
-	// 				.catch(err => {
-	// 					console.log({ err });
-	// 				});
-	// 		})
-	// 		.catch(err => {
-	// 			console.log({ err });
-	// 		});
-	// }
+	for (let i = 0; i < 490; i++) {
+		axios
+			.get(
+				`http://api.coinlayer.com/${getPastPastDays(i)
+					.toString()
+					.substr(0, 10)}?access_key=${
+					process.env.REACT_APP_COINLAYER_KEY
+				}&target=EUR`
+			)
+			.then(res => {
+				Rates.findOneAndUpdate(
+					{ date: res.data.date, target: res.data.target },
+					{
+						success: res.data.success,
+						target: res.data.target,
+						date: res.data.date,
+						rates: res.data.rates
+					},
+					{
+						upsert: true,
+						runValidators: true,
+						setDefaultsOnInsert: true,
+						new: true
+					}
+				)
+					.then(response => {
+						console.log(i);
+					})
+					.catch(err => {
+						console.log({ err });
+					});
+			})
+			.catch(err => {
+				console.log({ err });
+			});
+	}
 });
 router.get('/', (req, res) => {
 	if (req.query.date) {
@@ -68,7 +64,7 @@ router.get('/', (req, res) => {
 		? Rates.aggregate([
 			{ $match: req.query },
 			//Change target: 1 to "currency":"target"
-			{ $project: { _id: 0, target: 1, rates: 1 } }
+			{ $project: { _id: 0, target: 1, rates: 1, date: 1 } }
 		  ])
 			.then(rate => {
 				res.send({ rate });
