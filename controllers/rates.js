@@ -9,7 +9,7 @@ const getPastDays = number => {
 };
 
 const getPastPastDays = number => {
-	let date1 = new Date(getPastDays(898));
+	let date1 = new Date(getPastDays(1387));
 
 	let pastDate1 = new Date(
 		date1.setDate(date1.getDate() - number)
