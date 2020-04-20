@@ -13,11 +13,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/rates', require('./controllers/exchange_rates'));
-// app.use('/simpleRates', require('./controllers/rates'));
+app.use('/simpleRates', require('./controllers/rates'));
 
-// app.use('/live', require('./controllers/live'));
+app.use('/live', require('./controllers/live'));
 
-// setInterval(() => require('./controllers/live')(), 2 * 1000 * 60 * 60);
+setInterval(() => require('./controllers/live')(), 2 * 1000 * 60 * 60);
 
 // Middleware
 
