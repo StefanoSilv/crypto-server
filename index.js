@@ -14,10 +14,10 @@ app.use(bodyParser.json());
 
 app.use('/rates', require('./controllers/exchange_rates'));
 
-//Comment out the below routes if the code was pulled from git
+// Comment out the below routes if the code was pulled from git
 // app.use('/simpleRates', require('./controllers/rates'));
 // app.use('/live', require('./controllers/live'));
-// setInterval(() => require('./controllers/live')(), 2 * 1000 * 60 * 60);
+setInterval(() => require('./controllers/live')(), 2 * 1000 * 60 * 60);
 
 // Middleware
 
