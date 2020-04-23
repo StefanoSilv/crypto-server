@@ -5,13 +5,12 @@ const cors = require('cors');
 require('dotenv').config();
 const exchange = require('./functions');
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
 const app = express();
 const database = require('./db');
 
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use('/rates', require('./controllers/exchange_rates'));
 
 // Comment out the below routes if the code was pulled from git
